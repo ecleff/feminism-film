@@ -19,6 +19,8 @@ const svg = d3
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+
 //Read the data
 d3.csv("movies_1997_2013.csv").then(function (data) {
   data.forEach(function (d) {
@@ -26,7 +28,7 @@ d3.csv("movies_1997_2013.csv").then(function (data) {
     d["domgross"] = +d["domgross"];
     d["intgross"] = +d["intgross"];
     
-    console.log(d)
+    // console.log(d)
   });
 ok = Object.keys(data[0])
 console.log(ok)
@@ -38,8 +40,8 @@ avgBudget = d3.rollups(
     count: v.length,
     mean_budget: d3.mean(v, d => +d.budget), // get the average estimated project cost!
   }),
-  d => d.year,
-  d => d.viz_results
+  d => d.year
+  // d => d.viz_results
   
 )
 console.log(avgBudget)
@@ -48,18 +50,23 @@ console.log(avgBudget)
 aB_data = avgBudget.map(d => {
   let obj = {};
   const [key, value] = d;
-  obj = { key: key, value: value.count };
+  obj = { key: key, value: value.count};
   return obj;
+  
 })
 
 console.log(aB_data)
 
-let root = d3.hierarchy(aB_data);
-root.sum(function(d) {
-return d[1];
+
+test = avgBudget.map(d => {
+  let obj = {};
+  obj = {key: d.key, peryear:{
+    [d.values.count]: d.values.mean_budget
+  }}
 })
 
-console.log(root)
+console.log(test)
+
 
 
   // Add X axis
@@ -67,7 +74,7 @@ console.log(root)
 
   const x = d3.scaleBand()
   .range([0, width])
-  .domain(data.map(d => d.key))
+  .domain(data.map(d => d.year))
   .padding(0.2);
   svg.append("g")
   .attr("transform", `translate(0, ${height})`)
@@ -85,8 +92,8 @@ console.log(root)
 
   // Add Y axis
   const y = d3.scaleLinear()
-    .domain([10000000, 106500000])
-    // .domain([10,100])
+    // .domain([10000000, 106500000])
+    .domain([10,100])
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y).ticks(20));
@@ -94,30 +101,32 @@ console.log(root)
 const z = d3.scaleSqrt()
 .domain([0, 50])
 .range([2, 30]);
+
 // color
 const myColor = d3.scaleOrdinal()
     .domain(["notalk", "pass","fail"])
     .range(d3.schemeSet1);
+
 // Add dots
-// svg.append('g')
-// .selectAll("dot")
-// .data(data)
-// .join("circle")
-// //   .attr("class", function(d) { return "bubbles " + d.clean_test })
-//   .attr("cx", d => x(d.year))
-//   .attr("cy", y(avgBudget))
-//   .attr("r", z(countMovies))
-//   .style("fill", d => myColor(d.clean_test))
+svg.append('g')
+.selectAll("dot")
+.data(aB_data)
+.join("circle")
+  // .attr("class", function(d) { return "bubbles " + d.key })
+  .attr("cx", d => x(d.key))
+  .attr("cy", d =>y(d.value))
+  .attr("r", 5)
+  // .style("fill", d => myColor(d.key))
 
 
-svg
-    .append("g")
-    .selectAll("dot")
-    .data(root.descendants())
-    .join("circle")
-    .attr("cx", d => x(d.key))
-    .attr("cy",  d => y(d.value.mean_budget))
-    .attr("r", 6)
+// svg
+//     .append("g")
+//     .selectAll("dot")
+//     .data(root.descendants())
+//     .join("circle")
+//     .attr("cx", d => x(d.key))
+//     .attr("cy",  d => y(d.value.mean_budget))
+//     .attr("r", 6)
    
 
 
