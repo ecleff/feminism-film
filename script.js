@@ -40,8 +40,8 @@ avgBudget = d3.rollups(
     count: v.length,
     mean_budget: d3.mean(v, d => +d.budget), // get the average estimated project cost!
   }),
-  d => d.year
-  // d => d.viz_results
+  d => d.year,
+  d => d.viz_results
   
 )
 console.log(avgBudget)
@@ -49,8 +49,8 @@ console.log(avgBudget)
 
 aB_data = avgBudget.map(d => {
   let obj = {};
-  const [key, value] = d;
-  obj = { key: key, value: value.count};
+  const [key, values] = d;
+  obj = { key: key, count: values[1], avg: values[2]};
   return obj;
   
 })
@@ -58,14 +58,15 @@ aB_data = avgBudget.map(d => {
 console.log(aB_data)
 
 
-test = avgBudget.map(d => {
-  let obj = {};
-  obj = {key: d.key, peryear:{
-    [d.values.count]: d.values.mean_budget
-  }}
-})
+test = avgBudget.map(
+  // let obj = {};
+  // obj = {key: d.key, peryear:{
+  //   [d.values.count]: d.values.mean_budget
+  // }}
+  d => d.year
+)
 
-console.log(test)
+// console.log(test)
 
 
 
@@ -92,8 +93,8 @@ console.log(test)
 
   // Add Y axis
   const y = d3.scaleLinear()
-    // .domain([10000000, 106500000])
-    .domain([10,100])
+    .domain([10000000, 106500000])
+    // .domain([10,100])
     .range([height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y).ticks(20));
@@ -114,8 +115,8 @@ svg.append('g')
 .join("circle")
   // .attr("class", function(d) { return "bubbles " + d.key })
   .attr("cx", d => x(d.key))
-  .attr("cy", d =>y(d.value))
-  .attr("r", 5)
+  .attr("cy", d =>y(d.avg[1].mean_budget))
+  .attr("r", d=>z(d.count[1].count))
   // .style("fill", d => myColor(d.key))
 
 
