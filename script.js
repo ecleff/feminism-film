@@ -139,11 +139,13 @@ svg.append('g')
 
 const svg2 = d3
   .select("#my_dataviz_2")
+  // .append("svg")
+  // .attr("width", width + margin.left + margin.right)
+  // .attr("height", height + margin.top + margin.bottom)
+  // .append("g")
+  // .attr("transform", `translate(${margin.left}, ${margin.top})`);
   .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+  .attr("viewBox", [-50,100, width-10, height-10]);
 
 
 //Read the data
@@ -168,7 +170,7 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
   // Add Y axis
   const y2 = d3.scaleLinear()
     .domain([4000, 2783918982])
-    .range([ height, 0]);
+    .range([ height-10, 0]);
   // svg2.append("g")
   //   .call(d3.axisLeft(y2));
 
@@ -178,32 +180,7 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
     .range(d3.schemeSet1);
 
 
-  // highlight group
-  const highlight = function(event,d){
 
-    selected_group = d.viz_results
-
-    d3.selectAll(".dot")
-      .transition()
-      .duration(200)
-      .style("fill", "lightgrey")
-      .attr("r", 3)
-
-    d3.selectAll("." + selected_group)
-      .transition()
-      .duration(200)
-      .style("fill", myColor2(selected_group))
-      .attr("r", 7)
-  }
-
-  // Highlight the specie that is hovered
-  const doNotHighlight = function(event,d){
-    d3.selectAll(".dot")
-      .transition()
-      .duration(200)
-      .style("fill", d => myColor2(d.viz_results))
-      .attr("r", 5 )
-  }
 // zoom
 
 const zoom = d3.zoom()
@@ -218,7 +195,7 @@ grid = (g, x2, y2) => g
     .attr("stroke-opacity", 0.1)
     .call(g => g
       .selectAll(".x")
-      .data(x2.ticks(12))
+      .data(x2.ticks(4))
       .join(
         enter => enter.append("line").attr("class", "x").attr("y2", height),
         update => update,
@@ -241,15 +218,51 @@ k = height / width
 
 xAxis = (g, x2) => g
     .attr("transform", `translate(0,${height})`)
-    .call(d3.axisTop(x2).ticks(12))
+    .call(d3.axisTop(x2).ticks(5))
     .call(g => g.select(".domain").attr("display", "none"))
+    .selectAll("text")
+    .attr("transform", "translate(-10,0)rotate(-90)")
+    .style("text-anchor", "end");
  yAxis = (g, y2) => g
     .call(d3.axisRight(y2).ticks(12 * k))
     .call(g => g.select(".domain").attr("display", "none"))
 
+
+  // tooltip
+  const tooltip2 = d3
+  .select("#my_dataviz_2")
+  .append("div")
+  .style("opacity", 0)
+  .attr("class", "tooltip")
+  .style("background-color", "black")
+  .style("border-radius", "5px")
+  .style("padding", "10px")
+  .style("color", "white")
+
+  const mouseover2 = function (event, d) {
+    tooltip2.style("opacity", 1)
+    .style("left", (event.x)/2 + "px")
+    .style("top", (event.y)/2+30 + "px");
+   
+  };
+
+  const mousemove2 = function (event, d) {
+    tooltip2
+      .html(
+        `Movie: ${d.title}<br />
+        International Gross: $${d.intgross} `
+      )
+      .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+      .style("bottom", (event.y)/2+30 + "px");
+  };
+ // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+ const mouseleave2 = function (event, d) {
+  tooltip2.transition().duration(200).style("opacity", 0);
+};
+
   // scatterplot
 
-  // function update() {
+
     gDot = svg2.append('g')
     .selectAll("dot")
     .data(data)
@@ -261,13 +274,10 @@ xAxis = (g, x2) => g
       .attr("r", 5)
       .style("fill", d => myColor2(d.viz_results))
       .style("opacity", "0.7")
-      // .call(zoom)
-      .on("mouseover", highlight)
-      .on("mouseleave", doNotHighlight )
-   
-    // }
-    // initZoom();
-    // update();
+      .on("mouseover", mouseover2)
+      .on("mousemove", mousemove2)
+      .on("mouseleave", mouseleave2);
+  
 
   svg2.call(zoom).call(zoom.transform, d3.zoomIdentity);
 
