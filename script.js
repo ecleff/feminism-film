@@ -161,16 +161,16 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
   const x2 = d3.scaleLinear()
     .domain([400, 106500000])
     .range([ 0, width ]);
-  svg2.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x2).ticks(5));
+  // svg2.append("g")
+  //   .attr("transform", `translate(0, ${height})`)
+  //   .call(d3.axisBottom(x2).ticks(5));
 
   // Add Y axis
   const y2 = d3.scaleLinear()
     .domain([4000, 2783918982])
     .range([ height, 0]);
-  svg2.append("g")
-    .call(d3.axisLeft(y2));
+  // svg2.append("g")
+  //   .call(d3.axisLeft(y2));
 
     // color
     const myColor2 = d3.scaleOrdinal()
@@ -209,9 +209,34 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
 const zoom = d3.zoom()
       .scaleExtent([0.5, 32])
       .on("zoom", zoomed);
- const gx = svg.append("g");
+ const gx = svg2.append("g");
 
-const gy = svg.append("g");
+const gy = svg2.append("g");
+const gGrid = svg2.append("g");
+grid = (g, x2, y2) => g
+    .attr("stroke", "currentColor")
+    .attr("stroke-opacity", 0.1)
+    .call(g => g
+      .selectAll(".x")
+      .data(x2.ticks(12))
+      .join(
+        enter => enter.append("line").attr("class", "x").attr("y2", height),
+        update => update,
+        exit => exit.remove()
+      )
+        .attr("x1", d => 0.5 + x2(d))
+        .attr("x2", d => 0.5 + x2(d)))
+    .call(g => g
+      .selectAll(".y")
+      .data(y2.ticks(4 * k))
+      .join(
+        enter => enter.append("line").attr("class", "y").attr("x2", width),
+        update => update,
+        exit => exit.remove()
+      )
+        .attr("y1", d => 0.5 + y2(d))
+        .attr("y2", d => 0.5 + y2(d)));
+
 k = height / width
 
 xAxis = (g, x2) => g
