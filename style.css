@@ -108,3 +108,12 @@ body {
   margin-left: 150px;
 }
 
+.bg > rect {
+  cursor: move;
+}
+.bg.grabbing > rect {
+  cursor: grabbing;
+}
+.bg.scaling > rect {
+  cursor: zoom-in;
+}

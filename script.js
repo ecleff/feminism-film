@@ -159,11 +159,11 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
 
   // Add X axis
   const x2 = d3.scaleLinear()
-    .domain([900, 106500000])
+    .domain([400, 106500000])
     .range([ 0, width ]);
   svg2.append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x2));
+    .call(d3.axisBottom(x2).ticks(5));
 
   // Add Y axis
   const y2 = d3.scaleLinear()
@@ -192,7 +192,7 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
     d3.selectAll("." + selected_group)
       .transition()
       .duration(200)
-      .style("fill", color(selected_group))
+      .style("fill", myColor2(selected_group))
       .attr("r", 7)
   }
 
@@ -204,9 +204,28 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
       .style("fill", d => myColor2(d.viz_results))
       .attr("r", 5 )
   }
+// zoom
+
+const zoom = d3.zoom()
+      .scaleExtent([0.5, 32])
+      .on("zoom", zoomed);
+ const gx = svg.append("g");
+
+const gy = svg.append("g");
+k = height / width
+
+xAxis = (g, x2) => g
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisTop(x2).ticks(12))
+    .call(g => g.select(".domain").attr("display", "none"))
+ yAxis = (g, y2) => g
+    .call(d3.axisRight(y2).ticks(12 * k))
+    .call(g => g.select(".domain").attr("display", "none"))
 
   // scatterplot
-    svg2.append('g')
+
+  // function update() {
+    gDot = svg2.append('g')
     .selectAll("dot")
     .data(data)
     .enter()
@@ -217,10 +236,32 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
       .attr("r", 5)
       .style("fill", d => myColor2(d.viz_results))
       .style("opacity", "0.7")
+      // .call(zoom)
       .on("mouseover", highlight)
       .on("mouseleave", doNotHighlight )
    
+    // }
+    // initZoom();
+    // update();
 
+  svg2.call(zoom).call(zoom.transform, d3.zoomIdentity);
+
+  function zoomed({transform}) {
+    const zx = transform.rescaleX(x2).interpolate(d3.interpolateRound);
+    const zy = transform.rescaleY(y2).interpolate(d3.interpolateRound);
+    gDot.attr("transform", transform).attr("stroke-width", 5 / transform.k);
+    gx.call(xAxis, zx);
+    gy.call(yAxis, zy);
+    gGrid.call(grid, zx, zy);
+  }
+
+  return Object.assign(svg2.node(), {
+    reset() {
+      svg.transition()
+          .duration(750)
+          .call(zoom.transform, d3.zoomIdentity);
+    }
+  });
 
 });
 
