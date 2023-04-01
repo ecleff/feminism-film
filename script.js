@@ -145,7 +145,7 @@ const svg2 = d3
   // .append("g")
   // .attr("transform", `translate(${margin.left}, ${margin.top})`);
   .append("svg")
-  .attr("viewBox", [-50,100, width-10, height-10]);
+  .attr("viewBox", [-100,10, width-50, height]);
 
 
 //Read the data
@@ -162,7 +162,7 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
   // Add X axis
   const x2 = d3.scaleLinear()
     .domain([400, 106500000])
-    .range([ 0, width ]);
+    .range([ 0, width-50 ]);
   // svg2.append("g")
   //   .attr("transform", `translate(0, ${height})`)
   //   .call(d3.axisBottom(x2).ticks(5));
@@ -184,7 +184,7 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
 // zoom
 
 const zoom = d3.zoom()
-      .scaleExtent([0.5, 32])
+      .scaleExtent([0.5, 30])
       .on("zoom", zoomed);
  const gx = svg2.append("g");
 
@@ -217,15 +217,19 @@ grid = (g, x2, y2) => g
 k = height / width
 
 xAxis = (g, x2) => g
-    .attr("transform", `translate(0,${height})`)
+    .attr("transform", `translate(0,${height+20})`)
     .call(d3.axisTop(x2).ticks(5))
     .call(g => g.select(".domain").attr("display", "none"))
     .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-90)")
-    .style("text-anchor", "end");
+    .attr("transform", "translate(-10,0)rotate(0)")
+    .style("text-anchor", "end")
+    .style("font-size","10px");
  yAxis = (g, y2) => g
     .call(d3.axisRight(y2).ticks(12 * k))
     .call(g => g.select(".domain").attr("display", "none"))
+    .selectAll("text")
+    .style("text-anchor", "end")
+    .style("font-size","10px");
 
 
   // tooltip
@@ -241,6 +245,9 @@ xAxis = (g, x2) => g
 
   const mouseover2 = function (event, d) {
     tooltip2.style("opacity", 1)
+    // .style("transform", "translate(``calc( -50% + ${x2}px),``calc(-100% + ${y2}px)``)")
+    // .style("top",  `${(d.y2 - (tooltip2.clientHeight / 2))}px`)
+    // .style("left", `${(d.x2 + 35)}px`);
     .style("left", (event.x)/2 + "px")
     .style("top", (event.y)/2+30 + "px");
    
@@ -248,12 +255,12 @@ xAxis = (g, x2) => g
 
   const mousemove2 = function (event, d) {
     tooltip2
-      .html(
-        `Movie: ${d.title}<br />
+      .html(`Movie: ${d.title}<br />
         International Gross: $${d.intgross} `
       )
+      // .style("transform", "translate(calc( -50% + ${x}px), calc(-100% + ${y}px))")
       .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-      .style("bottom", (event.y)/2+30 + "px");
+      .style("top", (event.y)/2+30 + "px");
   };
  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
  const mouseleave2 = function (event, d) {
@@ -268,7 +275,8 @@ xAxis = (g, x2) => g
     .data(data)
     .enter()
     .append("circle")
-      .attr("class", function (d) { return "dot " + d.viz_results } )
+    .attr("class", "bubbles")
+      // .attr("class", function (d) { return "dot " + d.viz_results } )
       .attr("cx", function (d) { return x2(d.budget); } )
       .attr("cy", function (d) { return y2(d.intgross); } )
       .attr("r", 5)
