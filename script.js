@@ -35,7 +35,7 @@ const svg = d3
   const x = d3.scaleBand()
   .range([0, width])
   .domain(data.map(d => d.year))
-  .padding(0.2);
+  .padding(0.5);
   svg.append("g")
   .attr("transform", `translate(0, ${height})`)
   .call(d3.axisBottom(x))
@@ -88,7 +88,7 @@ const myColor = d3.scaleOrdinal()
 
 // A function that change this tooltip when the user hover a point.
   // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
-
+  const formatMoney = d3.format(",.4r")
   const mouseover = function (event, d) {
     tooltip.style("opacity", 1)
     .style("left", (event.x)/2 + "px")
@@ -99,12 +99,11 @@ const myColor = d3.scaleOrdinal()
   const mousemove = function (event, d) {
     tooltip
       .html(
-        `Bechdel test result: ${d.viz_results}<br />
-        Number of films: ${d.count_movies}<br />
-        Average budget: $${d.avg_budget} `
+        `In ${d.year}, Hollywood spent an average of $${formatMoney(d.avg_budget)} per movie <br /> with a ${d.viz_results} Bechdel Test Result.<br />
+ `
       )
       .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-      .style("top", (event.y)/2+30 + "px");
+      .style("top", (event.y)/2 + "px");
   };
  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
  const mouseleave = function (event, d) {
@@ -253,10 +252,11 @@ xAxis = (g, x2) => g
    
   };
 
+  const formatMoney2 = d3.format(",.4r")
   const mousemove2 = function (event, d) {
     tooltip2
       .html(`Movie: ${d.title}<br />
-        International Gross: $${d.intgross} `
+        International Gross: $${formatMoney2(d.intgross)} `
       )
       // .style("transform", "translate(calc( -50% + ${x}px), calc(-100% + ${y}px))")
       .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
