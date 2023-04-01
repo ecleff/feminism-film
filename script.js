@@ -92,7 +92,7 @@ const myColor = d3.scaleOrdinal()
   const mouseover = function (event, d) {
     tooltip.style("opacity", 1)
     .style("left", (event.x)/2 + "px")
-    .style("top", (event.y)/2+30 + "px");
+    .style("top", (event.y)/2 + "px");
    
   };
 
@@ -145,7 +145,7 @@ const svg2 = d3
   // .append("g")
   // .attr("transform", `translate(${margin.left}, ${margin.top})`);
   .append("svg")
-  .attr("viewBox", [-100,10, width-50, height]);
+  .attr("viewBox", [-100,10, width-60, height+10]);
 
 
 //Read the data
@@ -248,8 +248,8 @@ xAxis = (g, x2) => g
     // .style("transform", "translate(``calc( -50% + ${x2}px),``calc(-100% + ${y2}px)``)")
     // .style("top",  `${(d.y2 - (tooltip2.clientHeight / 2))}px`)
     // .style("left", `${(d.x2 + 35)}px`);
-    .style("left", (event.x)/2 + "px")
-    .style("top", (event.y)/2+30 + "px");
+    .style("left", (event.x)+10 + "px")
+    .style("top", (event.y)+10 + "px");
    
   };
 

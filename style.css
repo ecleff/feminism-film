@@ -117,3 +117,8 @@ body {
 .bg.scaling > rect {
   cursor: zoom-in;
 }
+
+.tooltip {
+  display: inline;
+  position: fixed;
+}
