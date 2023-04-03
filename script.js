@@ -160,16 +160,18 @@ full = d3.csv("movies_1997_2013.csv").then(function (data) {
 
   // Add X axis
   const x2 = d3.scaleLinear()
-    .domain([400, 106500000])
-    .range([ 0, width-50 ]);
+    .domain([700, 425000000])
+    .range([ 0, width-50]);
   // svg2.append("g")
   //   .attr("transform", `translate(0, ${height})`)
   //   .call(d3.axisBottom(x2).ticks(5));
 
   // Add Y axis
   const y2 = d3.scaleLinear()
-    .domain([4000, 2783918982])
-    .range([ height-10, 0]);
+  .range([height - margin.bottom, margin.top])
+  .domain(d3.extent(data.map(d => d.intgross)))
+    // .domain([4000, 2783918982])
+    // .range([ height-10, 0]);
   // svg2.append("g")
   //   .call(d3.axisLeft(y2));
 
@@ -230,6 +232,7 @@ xAxis = (g, x2) => g
     .style("text-anchor", "end")
     .style("font-size","10px");
 
+ 
 
   // tooltip
   const tooltip2 = d3
@@ -256,6 +259,7 @@ xAxis = (g, x2) => g
   const mousemove2 = function (event, d) {
     tooltip2
       .html(`Movie: ${d.title}<br />
+      Budget: $${formatMoney2(d.budget)} <br />
         International Gross: $${formatMoney2(d.intgross)} `
       )
       // .style("transform", "translate(calc( -50% + ${x}px), calc(-100% + ${y}px))")
