@@ -57,7 +57,7 @@ body {
   display: flex;
   /*   border: 2px solid black; */
   max-width: 1000px;
-  border: 1px solid black;
+  
   margin: 20px;
 }
 /*  this child box is for the left side of the canvas containing the image and the caption*/
@@ -104,9 +104,38 @@ body {
   font-family: "Lato", sans-serif;
 }
 .legend-text {
-  font-size: 10px;
-  margin-left: 150px;
+  font-size: 14px;
+  margin-left: 10px;
 }
+
+.dot_pass {
+  height: 20px;
+  width: 20px;
+  background-color: blue;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px;
+}
+
+.dot_fail {
+  height: 20px;
+  width: 20px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px;
+}
+
+.dot_nowomen {
+  height: 20px;
+  width: 20px;
+  background-color: purple;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 10px;
+}
+
+
 
 .bg > rect {
   cursor: move;
