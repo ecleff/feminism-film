@@ -23,314 +23,7 @@ const svg = d3
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 
-//   grouped = d3.csv("movies_grouped.csv").then(function (data) {
-//     data.forEach(function (d) {
-//       d["count_movies"] = +d["count_movies"];
-//       d["avg_budget"] = +d["avg_budget"];
-      
-//       // console.log(d)
-//     });
-
-
-//   const x = d3.scaleBand()
-//   .range([0, width])
-//   .domain(data.map(d => d.year))
-//   .padding(0.5);
-//   svg.append("g")
-//   .attr("transform", `translate(0, ${height})`)
-//   .call(d3.axisBottom(x))
-//   .selectAll("text")
-//     .attr("transform", "translate(-10,0)rotate(-45)")
-//     .style("text-anchor", "end");
-
-//     // Add X axis label:
-//   svg.append("text")
-//   .attr("text-anchor", "end")
-//   .attr("x", width)
-//   .attr("y", height+50 )
-//   .text("Year");
-
-//   // Add Y axis
-//   const y = d3.scaleLinear()
-//     .domain([10000000, 106500000])
-//     // .domain([10,100])
-//     .range([height, 0]);
-//   svg.append("g")
-//     .call(d3.axisLeft(y).ticks(20));
-
-//   // Y axis label
-//   svg.append("text")
-//   .attr("text-anchor", "end")
-//   .attr("transform", "rotate(-90)")
-//   .attr("y", -margin.left+60)
-//   .attr("x", -margin.top)
-//   .text("Average budget ($)")
-
-// // Add a scale for bubble size
-// const z = d3.scaleSqrt()
-// .domain([0, 50])
-// .range([2, 30]);
-
-// // color
-// const myColor = d3.scaleOrdinal()
-//     .domain(["notalk", "pass","fail"])
-//     .range(d3.schemeSet1);
-// // tooltip
-//     const tooltip = d3
-//     .select("#my_dataviz_1")
-//     .append("div")
-//     .style("opacity", 0)
-//     .attr("class", "tooltip")
-//     .style("background-color", "black")
-//     .style("border-radius", "5px")
-//     .style("padding", "10px")
-//     .style("color", "white")
-
-// // A function that change this tooltip when the user hover a point.
-//   // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
-//   const formatMoney = d3.format(",.4r")
-//   const mouseover = function (event, d) {
-//     tooltip.style("opacity", 1)
-//     .style("left", (event.x)/2 + "px")
-//     .style("top", (event.y)/2 + "px");
-   
-//   };
-
-//   const mousemove = function (event, d) {
-//     tooltip
-//       .html(
-//         `In ${d.year}, Hollywood spent an average of $${formatMoney(d.avg_budget)} per movie <br /> with a ${d.viz_results} Bechdel Test Result.<br />
-//  `
-//       )
-//       .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-//       .style("top", (event.y)/2 + "px");
-//   };
-//  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
-//  const mouseleave = function (event, d) {
-//   tooltip.transition().duration(200).style("opacity", 0);
-// };
-
-
-// // Add dots
-
-
-
-// svg.append('g')
-// .selectAll("dot")
-// .data(data)
-// .join("circle")
-//   .attr("class", "bubbles")
-//   .attr("cx", d => x(d.year))
-//   .attr("cy", d =>y(d.avg_budget))
-//   .attr("r", d=>z(d.count_movies))
-//   .style("fill", d => myColor(d.viz_results))
-//   .style("opacity", "0.7")
-//   .on("mouseover", mouseover)
-//   .on("mousemove", mousemove)
-//   .on("mouseleave", mouseleave)
-//   // .on('click', (event, d) => {
-//   //   // Stop the mouseover and mouseout events from propagating
-//   //   event.stopPropagation();
-    
-//   //   // Filter the data for the second graph
-//   //   const selectedYear = d.year;
-//   //   const filteredData = data.filter(d => d.year === selectedYear);
-//   //   updateSecondGraph(filteredData);
-//   //   console.log(filteredData)
-//   //   // Bind the filtered data to the second graph and update it
-//   //   // (e.g. a line chart)
-//   //   // ...
-//   });
-
-
-
-
-//   // Second Viz
-
-
-// // set the dimensions and margins of the graph
-
-
-// const svg2 = d3
-//   .select("#my_dataviz_2")
-//   // .append("svg")
-//   // .attr("width", width + margin.left + margin.right)
-//   // .attr("height", height + margin.top + margin.bottom)
-//   // .append("g")
-//   // .attr("transform", `translate(${margin.left}, ${margin.top})`);
-//   .append("svg")
-//   .attr("viewBox", [-100,10, width-60, height+10]);
-
-
-// //Read the data
-// full = d3.csv("movies_1997_2013.csv").then(function (data) {
-//   data.forEach(function (d) {
-//     d["budget"] = +d["budget"];
-//     d["domgross"] = +d["domgross"];
-//     d["intgross"] = +d["intgross"];
-    
-//     console.log(d)
-//   });
-
-
-//   // Add X axis
-//   const x2 = d3.scaleLinear()
-//     .domain([700, 425000000])
-//     .range([ 0, width-50]);
-//   // svg2.append("g")
-//   //   .attr("transform", `translate(0, ${height})`)
-//   //   .call(d3.axisBottom(x2).ticks(5));
-
-//   // Add Y axis
-//   const y2 = d3.scaleLinear()
-//   .range([height - margin.bottom, margin.top])
-//   .domain(d3.extent(data.map(d => d.intgross)))
-//     // .domain([4000, 2783918982])
-//     // .range([ height-10, 0]);
-//   // svg2.append("g")
-//   //   .call(d3.axisLeft(y2));
-
-//     // color
-//     const myColor2 = d3.scaleOrdinal()
-//     .domain(["notalk", "pass","fail"])
-//     .range(d3.schemeSet1);
-
-
-
-// // zoom
-
-// const zoom = d3.zoom()
-//       .scaleExtent([0.5, 30])
-//       .on("zoom", zoomed);
-//  const gx = svg2.append("g");
-
-// const gy = svg2.append("g");
-// const gGrid = svg2.append("g");
-// grid = (g, x2, y2) => g
-//     .attr("stroke", "currentColor")
-//     .attr("stroke-opacity", 0.1)
-//     .call(g => g
-//       .selectAll(".x")
-//       .data(x2.ticks(4))
-//       .join(
-//         enter => enter.append("line").attr("class", "x").attr("y2", height),
-//         update => update,
-//         exit => exit.remove()
-//       )
-//         .attr("x1", d => 0.5 + x2(d))
-//         .attr("x2", d => 0.5 + x2(d)))
-//     .call(g => g
-//       .selectAll(".y")
-//       .data(y2.ticks(4 * k))
-//       .join(
-//         enter => enter.append("line").attr("class", "y").attr("x2", width),
-//         update => update,
-//         exit => exit.remove()
-//       )
-//         .attr("y1", d => 0.5 + y2(d))
-//         .attr("y2", d => 0.5 + y2(d)));
-
-// k = height / width
-
-// xAxis = (g, x2) => g
-//     .attr("transform", `translate(0,${height+20})`)
-//     .call(d3.axisTop(x2).ticks(5))
-//     .call(g => g.select(".domain").attr("display", "none"))
-//     .selectAll("text")
-//     .attr("transform", "translate(-10,0)rotate(0)")
-//     .style("text-anchor", "end")
-//     .style("font-size","10px");
-//  yAxis = (g, y2) => g
-//     .call(d3.axisRight(y2).ticks(12 * k))
-//     .call(g => g.select(".domain").attr("display", "none"))
-//     .selectAll("text")
-//     .style("text-anchor", "end")
-//     .style("font-size","10px");
-
- 
-
-//   // tooltip
-//   const tooltip2 = d3
-//   .select("#my_dataviz_2")
-//   .append("div")
-//   .style("opacity", 0)
-//   .attr("class", "tooltip")
-//   .style("background-color", "black")
-//   .style("border-radius", "5px")
-//   .style("padding", "10px")
-//   .style("color", "white")
-
-//   const mouseover2 = function (event, d) {
-//     tooltip2.style("opacity", 1)
-//     // .style("transform", "translate(``calc( -50% + ${x2}px),``calc(-100% + ${y2}px)``)")
-//     // .style("top",  `${(d.y2 - (tooltip2.clientHeight / 2))}px`)
-//     // .style("left", `${(d.x2 + 35)}px`);
-//     .style("left", (event.x)+10 + "px")
-//     .style("top", (event.y)+10 + "px");
-   
-//   };
-
-//   const formatMoney2 = d3.format(",.4r")
-//   const mousemove2 = function (event, d) {
-//     tooltip2
-//       .html(`Movie: ${d.title}<br />
-//       Budget: $${formatMoney2(d.budget)} <br />
-//         International Gross: $${formatMoney2(d.intgross)} `
-//       )
-//       // .style("transform", "translate(calc( -50% + ${x}px), calc(-100% + ${y}px))")
-//       .style("left", (event.x)/2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-//       .style("top", (event.y)/2+30 + "px");
-//   };
-//  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
-//  const mouseleave2 = function (event, d) {
-//   tooltip2.transition().duration(200).style("opacity", 0);
-// };
-
-//   // scatterplot
-
-
-//     gDot = svg2.append('g')
-//     .selectAll("dot")
-//     .data(data)
-//     .enter()
-//     .append("circle")
-//     .attr("class", "bubbles")
-//       // .attr("class", function (d) { return "dot " + d.viz_results } )
-//       .attr("cx", function (d) { return x2(d.budget); } )
-//       .attr("cy", function (d) { return y2(d.intgross); } )
-//       .attr("r", 5)
-//       .style("fill", d => myColor2(d.viz_results))
-//       .style("opacity", "0.7")
-//       .on("mouseover", mouseover2)
-//       .on("mousemove", mousemove2)
-//       .on("mouseleave", mouseleave2);
-  
-
-//   svg2.call(zoom).call(zoom.transform, d3.zoomIdentity);
-
-//   function zoomed({transform}) {
-//     const zx = transform.rescaleX(x2).interpolate(d3.interpolateRound);
-//     const zy = transform.rescaleY(y2).interpolate(d3.interpolateRound);
-//     gDot.attr("transform", transform).attr("stroke-width", 5 / transform.k);
-//     gx.call(xAxis, zx);
-//     gy.call(yAxis, zy);
-//     gGrid.call(grid, zx, zy);
-//   }
-
-//   return Object.assign(svg2.node(), {
-//     reset() {
-//       svg.transition()
-//           .duration(750)
-//           .call(zoom.transform, d3.zoomIdentity);
-//     }
-//   });
-
-// });
-
-
-
-
-// test 2 - using same csv with rollup
+// csv with rollup
 
 d3.csv("movies_1997_2013.csv").then(data => {
   var ungroupedData = data.slice();
@@ -371,6 +64,7 @@ d3.csv("movies_1997_2013.csv").then(data => {
   ).sort((a, b) => a.year - b.year);
 
   console.log(scatterData)
+const formatNumber = d3.format(".2s");
 const x = d3.scaleBand()
   .range([0, width])
   .domain(scatterData.map(d => d.year))
@@ -395,7 +89,7 @@ const x = d3.scaleBand()
     // .domain([10,100])
     .range([height, 0]);
   svg.append("g")
-    .call(d3.axisLeft(y).ticks(20));
+    .call(d3.axisLeft(y).ticks(20).tickFormat(formatNumber));
 
   // Y axis label
   svg.append("text")
@@ -412,10 +106,10 @@ const z = d3.scaleSqrt()
 
 // // color
 const myColor = d3.scaleOrdinal()
-    .domain(["notalk", "pass","fail"])
-    .range(d3.schemeSet1);
+    .domain(["nowomen", "pass","fail"])
+    .range(["#231123", "#558c8c", "#82204a"]);
 // tooltip
-    const tooltip = d3
+  const tooltip = d3
     .select("#my_dataviz_1")
     .append("div")
     .style("opacity", 0)
@@ -441,7 +135,7 @@ const myColor = d3.scaleOrdinal()
         .html(
           `In ${d.year}, Hollywood spent an average of $${formatMoney(
             d.budgetMean
-          )} per movie <br /> with a ${d.bechdelResult} Bechdel Test Result.<br />
+          )} per movie <br /> that had a Bechdel Test result of: ${d.bechdelResult}
    `
         )
         .style("left", event.pageX + 10 + "px")
@@ -476,6 +170,10 @@ svg.append('g')
     const filteredData = ungroupedData.filter(d => d.year === selectedYear);
     updateSecondGraph(filteredData);
     console.log(filteredData)
+
+      // Show tooltip
+  // tooltip.style("opacity", 1)
+  // .html("Your tooltip content here");
   });
 
   // Load the data and create the first graph
@@ -494,7 +192,9 @@ const svg2 = d3.select("#my_dataviz_1")
 
 // Draw the second scatterplot with the filtered data
 function updateSecondGraph(filteredData) {
-
+  svg2.selectAll("g").remove();
+  svg2.selectAll("text").remove();
+  const formatNumber = d3.format(".2s");
   const x2 = d3.scaleBand()
     .range([0, width])
     .domain(filteredData.map(d => d.budget))
@@ -502,21 +202,24 @@ function updateSecondGraph(filteredData) {
 
   svg2.append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x2))
+    .call(d3.axisBottom(x2).tickValues(x2.domain().filter((d, i) => !(i % Math.ceil(filteredData.length / 5)))).tickFormat(formatNumber))
     .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
-      .style("text-anchor", "end");
+      .attr("transform", "translate(-10,0)rotate(0)")
+      .style("text-anchor", "end")
+      // .style("font-size", "6px");
   svg2.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
-    .attr("y", height+50 )
+    .attr("y", height+45 )
     .text("Budget");
-
+ 
+ 
+  
   const y2 = d3.scaleLinear()
     .domain([0, d3.max(filteredData, d => d.intgross)])
     .range([height, 0]);
   svg2.append("g")
-    .call(d3.axisLeft(y2).ticks(10));
+    .call(d3.axisLeft(y2).ticks(5).tickFormat(formatNumber));
 
   svg2.append("text")
     .attr("text-anchor", "end")
@@ -525,6 +228,31 @@ function updateSecondGraph(filteredData) {
     .attr("x", -margin.top)
     .text("International gross");
 
+  svg2.append("text")
+    .data(filteredData)
+    .attr("text-anchor", "end")
+    .attr("x", width-500)
+    .attr("y", height-510)
+    .style("font-size", "24px")
+    .text(function(d) {
+      return d.year;
+    });
+
+  const myColor = d3.scaleOrdinal()
+    .domain(["nowomen", "pass","fail"])
+    .range(["#231123", "#558c8c", "#82204a"]);
+
+  // tooltip
+  const tooltip = d3.select("body").append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0)
+  .style("background-color", "black")
+  .style("border-radius", "5px")
+  .style("padding", "10px")
+  .style("color", "white");
+
+  // dots
+  const formatMoney = d3.format(",.4r")
     svg2.selectAll(".dot")
     .data(filteredData)
     .join("circle")
@@ -532,9 +260,25 @@ function updateSecondGraph(filteredData) {
     .attr("cx", d => x2(d.budget))
     .attr("cy", d => y2(d.intgross))
     .attr("r", 5)
-    .style("fill", d => myColor(d.bechdelResult))
-    .style("opacity", "0.7");
-
+    .style("fill", d => myColor(d.viz_results))
+    .style("opacity", "0.7")
+    .on("mouseover", function(event, d) {
+      tooltip.transition()
+        .duration(200)
+        .style("opacity", 0.9);
+      tooltip.html(`Movie title: ${d.title}<br>Budget: $${formatMoney(d.budget)}<br>International gross: $${formatMoney(d.intgross)}`)
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 28) + "px");
+    })
+    .on("mousemove", function(event) {
+      tooltip.style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY - 28) + "px");
+    })
+    .on("mouseleave", function(event) {
+      tooltip.transition()
+        .duration(500)
+        .style("opacity", 0);
+    });
 
 }
 
