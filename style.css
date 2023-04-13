@@ -1,12 +1,14 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Open+Sans&display=swap');
 * {
   box-sizing: border-box;
   font-size: 16px;
-  font-family: "Lato", sans-serif;
+  font-family: "Open Sans", sans-serif;
   /*sans-serif is the "fallback font"
 /*   fhref="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" */
 }
+
+
 
 [hidden] {
   display: none !important;
@@ -35,7 +37,7 @@ html {
 /* adjust typography defaults */
 body {
   margin: 10px;
-  font-family: "Lato";
+  font-family: "Open Sans";
   line-height: 1.5;
   background-color: white;
   color: black;
@@ -72,8 +74,10 @@ body {
   flex-wrap: wrap;
   flex-grow: 0;
 }
+
+
 .title {
-  font-family: "Lato", sans-serif;
+  font-family: 'Limelight', sans-serif;
   font-style: 900;
   font-weight: bold;
   font-size: 40px;
@@ -89,10 +93,10 @@ body {
 }
 
 .sub-heading {
-  font-family: "Lato", sans-serif;
+  font-family: "Limelight", sans-serif;
   font-style: 900;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 105%;
   margin: 20px;
   position: relative;
@@ -101,7 +105,7 @@ body {
 
 .main-text {
   margin: 20px;
-  font-family: "Lato", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 .legend-text {
   font-size: 14px;
@@ -137,7 +141,7 @@ body {
 
 
 
-.bg > rect {
+/* .bg > rect {
   cursor: move;
 }
 .bg.grabbing > rect {
@@ -145,7 +149,7 @@ body {
 }
 .bg.scaling > rect {
   cursor: zoom-in;
-}
+} */
 
 .tooltip {
   /* display: inline;

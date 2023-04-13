@@ -190,6 +190,8 @@ const svg2 = d3.select("#my_dataviz_1")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
+
+
 // Draw the second scatterplot with the filtered data
 function updateSecondGraph(filteredData) {
   svg2.selectAll("g").remove();
@@ -216,7 +218,7 @@ function updateSecondGraph(filteredData) {
  
   
   const y2 = d3.scaleLinear()
-    .domain([0, d3.max(filteredData, d => d.intgross)])
+    .domain([0, d3.max(filteredData, d => +d.intgross)])
     .range([height, 0]);
   svg2.append("g")
     .call(d3.axisLeft(y2).ticks(5).tickFormat(formatNumber));
@@ -257,8 +259,8 @@ function updateSecondGraph(filteredData) {
     .data(filteredData)
     .join("circle")
     .attr("class", "dot")
-    .attr("cx", d => x2(d.budget))
-    .attr("cy", d => y2(d.intgross))
+    .attr("cx", d => x2(+d.budget))
+    .attr("cy", d => y2(+d.intgross))
     .attr("r", 5)
     .style("fill", d => myColor(d.viz_results))
     .style("opacity", "0.7")
