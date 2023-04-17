@@ -51,7 +51,7 @@ body {
 }
 
 .image {
-  margin-left: 10px;
+  margin: 20px;
   position: relative;
 }
 /*  creating flex boxes for the description section. 1 parent box and 2 children boxes. The parent box is the overall box containing all of the content above the canvas.*/
