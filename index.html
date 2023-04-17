@@ -22,36 +22,90 @@
 <link rel="icon" href="film-reel.png" />
 
 <!-- Create a div where the graph will take place -->
+<section class="header">
 <h1 class="title">Formative Films, Flimsy Representation</h1>
 <h2 class = "sub-heading"> Examining the representation of women in movies from my formative years </h3>
-<p class = "main-text">I have always loved movies and can most certainly say that the majority of my personality and my understanding of my sense of self are the very least non-reductive, stories about women, people of color, and basically anyone who is not a cis-hetero white man. I wanted to deeply derived from the things I grew up watching. Unfortunately, Hollywood has historically done a bad job at telling nuanced, or at examine the stories that influenced (or had the potential to influence) me when I was growing up.</p>
-
-<h2 class = "heading"> What is the Bechdel test?</h2>
-<p class = "main-text">A way of evaluating whether or not a film or other work of fiction portrays women in a way that is sexist or characterized by gender ste- reotyping.
-  <p class = "main-text"> To pass the Bechdel test a work must feature: </p>
-  <p class="main-text">
-  <li> At least two women </li>
-   <li> These women must talk to each other, and  </li>
-   <li>Their conversation must concern something other than a man.</li>
-
-</p>
-<h2 class="heading"> How Hollywood Invested in Bechdel Failures from 1997-2013 </h2>
-<div class="main-text"> Legend </div>
+</section>
 <div class="flex-container">
   <div class="side1">
-    <div>
-<div class="dot_pass"></div>
-</div>
-<div>
-<div class="dot_fail"></div> 
-</div>
-<div class="dot_nowomen"></div>
+
+  <img src="tv-screen-small.gif" margin=40px/>
+  <p class = "main-text">
+    I have always loved movies and can most certainly say that the majority of my personality and my understanding of my sense of self are
+    deeply derived from the things I grew up watching. </p>
+    <p class="main-text">Unfortunately, Hollywood has historically done a bad job at telling nuanced, or at
+      the very least non-reductive, stories about women, people of color, and basically anyone who is not a cis-hetero white man. 
+      This project serves as an examination into the stories that influenced (or had the potential to influence) me when I was growing up.
+    </p>
+    
 </div>
 
+<!-- <div class="divider-line"></div> -->
 <div class="side2">
-<p class="legend-text">pass</p>
-<p class="legend-text">fail</p>
-<p class="legend-text">no women</p>
+  
+  <section class="section-header-1">
+    <h2 class = "heading"> The Bechdel Test</h2>
+    </section>
+    <p class = "main-text">The Bechdel Test is a way of evaluating whether or not a film or other work of fiction portrays women in a way that is sexist or characterized by gender stereotyping.
+      The Bechdel Test is named after American cartoonist <a href="https://dykestowatchoutfor.com/">Allison Bechdel</a> who debuted the metric in her 1985 comic strip <i>Dykes to Watch Out For</i>.
+      The Bechdel Test has inspired numerous variations and alterations as ways of discussing marginalized representation in film have evolved in the culture. </p>
+    
+  <p class = "main-text"> To pass the Bechdel test a work must feature: </p>
+  <p class="main-text">
+  <li class="main-text"> At least two women </li>
+   <li class="main-text"> These women must talk to each other, and  </li>
+   <li class="main-text">Their conversation must concern something other than a man.</li>
+
+</p>
+</div>
+</div>
+<section class="section-header-2">
+<h2 class="heading"> How Hollywood Invested in Bechdel Failures from 1997-2013 </h2>
+</section>
+<!-- <div class="legend-heading"> * Click a circle to get the movies for that year!</div>
+<img src="mouseclick.gif" /> -->
+<p class="main-text">This series of visualizations demonstrates how throughout my lifetime, Hollywood has more often invested more in male-dominated storytelling, with higher overall budgets awarded to films that fail the Bechdel test. 
+Here, users can observe trends in gender bias from 1997-2013 in how movies were invested in, how much they made, and how many concern stories with multi-dimensional non-male protagonists.
+</p>
+
+<div class="flex-container">
+  <div class="side1">
+
+  <div>
+<div class="dot_pass"> </div>
+
+</div>
+
+<div>
+<div class="dot_fail"></div> 
+
+</div>
+
+
+<div>
+  
+<div class="dot_nowomen"></div>
+
+</div>
+
+</div>
+<div class="side2">
+
+  <div class="legend-text"> Bechdel result</div>
+<p class="legend-text">Pass</p>
+<p class="legend-text">Fail</p>
+<p class="legend-text">No women (fail)</p>
+
+</div>
+<div class="side3">  <div class="legend-text-2"> Number of Movies </div>
+<div class="circle_small"></div>
+  <div class="circle_med"></div>
+  <div class="circle_large"></div>
+</div>
+<div class="side4">
+  <div class="legend-text"> Click a circle see more about the movies from a particular year. </div>
+<img src="mouseclick.gif" />
+<div class="legend-text">Then, hover over a point learn more about a particular movie.</div>
 </div>
 </div>
 
@@ -69,6 +123,10 @@
     <div id="bubbles:hover"></div>
     <div id="tooltip"></div>
   </div> -->
-  <div id="main-text"> More copy</div>
   <!-- <div id="dataviz_brushZoom"></div> -->
 </body>
+<section class="section-header-2">
+  <h2 class="heading"> About the data</h2>
+</section>
+<p class="main-text">Data for this project comes from <a href="https://www.kaggle.com/datasets/thedevastator/box-office-performance-of-movies-with-female-lea?resource=download">Box Office Performance of Movies with Female Leads: An Exploration of Gender in Film</a> by Carolee Mitchell,
+a dataset that explores the impact of gender on box office success. Mitchell looks at data from over 2000 films released between 1970 and 2013, including their budgets, domestic and international gross earnings, and their pass/fail status on the Bechdel Test. </p>

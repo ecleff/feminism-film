@@ -11,7 +11,7 @@ _ = d3.require('lodash@4.17.20/lodash.js').catch(() => window["_"])
 // set the dimensions and margins of the graph
 const margin = { top: 50, right: 30, bottom: 50, left: 200 },
   width = 860 - margin.left - margin.right,
-  height = 600 - margin.top - margin.bottom;
+  height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 const svg = d3
@@ -73,8 +73,9 @@ const x = d3.scaleBand()
   .attr("transform", `translate(0, ${height})`)
   .call(d3.axisBottom(x))
   .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end");
+    // .attr("transform", "translate(-10,0)rotate(0)")
+    .style("font-size", "12px")
+    .style("text-anchor", "center");
 
     // Add X axis label:
   svg.append("text")
@@ -84,18 +85,24 @@ const x = d3.scaleBand()
   .text("Year");
 
   // Add Y axis
+
   const y = d3.scaleLinear()
     .domain([10000000, 106500000])
     // .domain([10,100])
     .range([height, 0]);
   svg.append("g")
-    .call(d3.axisLeft(y).ticks(20).tickFormat(formatNumber));
+    .call(d3.axisLeft(y).ticks(10).tickFormat(formatNumber))
+    .selectAll("text")
+    .style("font-size", "12px");
+
+
+
 
   // Y axis label
   svg.append("text")
   .attr("text-anchor", "end")
   .attr("transform", "rotate(-90)")
-  .attr("y", -margin.left+60)
+  .attr("y", -margin.left+120)
   .attr("x", -margin.top)
   .text("Average budget ($)")
 
@@ -171,9 +178,6 @@ svg.append('g')
     updateSecondGraph(filteredData);
     console.log(filteredData)
 
-      // Show tooltip
-  // tooltip.style("opacity", 1)
-  // .html("Your tooltip content here");
   });
 
   // Load the data and create the first graph
@@ -207,8 +211,8 @@ function updateSecondGraph(filteredData) {
     .call(d3.axisBottom(x2).tickValues(x2.domain().filter((d, i) => !(i % Math.ceil(filteredData.length / 5)))).tickFormat(formatNumber))
     .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(0)")
-      .style("text-anchor", "end")
-      // .style("font-size", "6px");
+      .style("text-anchor", "start")
+      .style("font-size", "12px");
   svg2.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
@@ -221,12 +225,14 @@ function updateSecondGraph(filteredData) {
     .domain([0, d3.max(filteredData, d => +d.intgross)])
     .range([height, 0]);
   svg2.append("g")
-    .call(d3.axisLeft(y2).ticks(5).tickFormat(formatNumber));
+    .call(d3.axisLeft(y2).ticks(5).tickFormat(formatNumber))
+    .selectAll("text")
+    .style("font-size", "12px");
 
   svg2.append("text")
     .attr("text-anchor", "end")
     .attr("transform", "rotate(-90)")
-    .attr("y", -margin.left+60)
+    .attr("y", -margin.left+120)
     .attr("x", -margin.top)
     .text("International gross");
 
@@ -234,7 +240,7 @@ function updateSecondGraph(filteredData) {
     .data(filteredData)
     .attr("text-anchor", "end")
     .attr("x", width-500)
-    .attr("y", height-510)
+    .attr("y", height-310)
     .style("font-size", "24px")
     .text(function(d) {
       return d.year;
@@ -253,8 +259,15 @@ function updateSecondGraph(filteredData) {
   .style("padding", "10px")
   .style("color", "white");
 
+
+
+
   // dots
   const formatMoney = d3.format(",.4r")
+// const selectedYear = "1997";
+// filteredData = ungroupedData.filter(d => d.year === selectedYear);
+// updateSecondGraph(filteredData);
+
     svg2.selectAll(".dot")
     .data(filteredData)
     .join("circle")
