@@ -25,7 +25,7 @@ const svg = d3
 
 // csv with rollup
 
-d3.csv("movies_1997_2013.csv").then(data => {
+d3.csv("data_img/movies_1997_2013.csv").then(data => {
   var ungroupedData = data.slice();
   const groupedData = d3.rollup(
     data,
