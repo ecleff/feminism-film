@@ -198,17 +198,23 @@ const svg2 = d3.select("#my_dataviz_1")
 
 // Draw the second scatterplot with the filtered data
 function updateSecondGraph(filteredData) {
+  filteredData.forEach(function (d) {
+    d["budget"] = +d["budget"];
+    d["intgross"] = +d["intgross"];
+
+  });
   svg2.selectAll("g").remove();
   svg2.selectAll("text").remove();
+
   const formatNumber = d3.format(".2s");
-  const x2 = d3.scaleBand()
+  const x2 = d3.scaleLinear()
     .range([0, width])
-    .domain(filteredData.map(d => d.budget))
-    .padding(0.5);
+    .domain([d3.min(filteredData, d => d.budget), d3.max(filteredData, d => d.budget)]);
+
 
   svg2.append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x2).tickValues(x2.domain().filter((d, i) => !(i % Math.ceil(filteredData.length / 5)))).tickFormat(formatNumber))
+    .call(d3.axisBottom(x2).tickFormat(formatNumber))
     .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(0)")
       .style("text-anchor", "start")
@@ -272,8 +278,8 @@ function updateSecondGraph(filteredData) {
     .data(filteredData)
     .join("circle")
     .attr("class", "dot")
-    .attr("cx", d => x2(+d.budget))
-    .attr("cy", d => y2(+d.intgross))
+    .attr("cx", d => x2(d.budget))
+    .attr("cy", d => y2(d.intgross))
     .attr("r", 5)
     .style("fill", d => myColor(d.viz_results))
     .style("opacity", "0.7")
