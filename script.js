@@ -189,7 +189,7 @@ svg.append('g')
     row.binary === selectedBechdelResult
   );
     updateSecondGraph(filteredData);
-    console.log(filteredData)
+    console.log("filtered data",filteredData)
 
   });
 
