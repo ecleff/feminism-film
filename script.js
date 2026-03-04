@@ -183,7 +183,11 @@ svg.append('g')
   .on("mouseleave", mouseleave)
   .on('click', function(event, d) {
     const selectedYear = d.year;
-    const filteredData = ungroupedData.filter(d => d.year === selectedYear);
+    const selectedBechdelResult = d.bechdelResult;
+    const filteredData = ungroupedData.filter(row =>
+    row.year === selectedYear &&
+    row.bechdelResult === selectedBechdelResult
+  );
     updateSecondGraph(filteredData);
     console.log(filteredData)
 
@@ -262,7 +266,7 @@ function updateSecondGraph(filteredData) {
       return d.year;
     });
 
-const myColor2 = d3.scaleOrdinal()
+const myColor = d3.scaleOrdinal()
     .domain(["PASS","FAIL"])
     .range(["#558c8c", "#82204a"]);
 
@@ -291,7 +295,7 @@ const myColor2 = d3.scaleOrdinal()
     .attr("cx", d => x2(d.budget))
     .attr("cy", d => y2(d.intgross))
     .attr("r", 5)
-    .style("fill", d => myColor2(d.binary))
+    .style("fill", d => myColor(d.binary))
     .style("opacity", "0.7")
     .on("mouseover", function(event, d) {
       tooltip.transition()
