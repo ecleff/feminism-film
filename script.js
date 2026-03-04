@@ -186,7 +186,7 @@ svg.append('g')
     const selectedBechdelResult = d.bechdelResult;
     const filteredData = ungroupedData.filter(row =>
     row.year === selectedYear &&
-    row.bechdelResult === selectedBechdelResult
+    row.binary === selectedBechdelResult
   );
     updateSecondGraph(filteredData);
     console.log(filteredData)
