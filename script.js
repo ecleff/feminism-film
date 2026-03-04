@@ -4,7 +4,7 @@
 // const legend = Legend(d3.scaleSequential([0, 2], d3.interpolateMagma), {
 //   title: "Exposure"
 // })
-_ = d3.require('lodash@4.17.20/lodash.js').catch(() => window["_"])
+//_ = d3.require('lodash@4.17.20/lodash.js').catch(() => window["_"])
 
 
 // 1st viz
