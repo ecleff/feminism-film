@@ -290,7 +290,7 @@ function updateSecondGraph(filteredData) {
     .attr("cx", d => x2(d.budget))
     .attr("cy", d => y2(d.intgross))
     .attr("r", 5)
-    .style("fill", d => myColor(d.viz_results))
+    .style("fill", d => myColor(d.bechdelResult))
     .style("opacity", "0.7")
     .on("mouseover", function(event, d) {
       tooltip.transition()
