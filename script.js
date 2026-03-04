@@ -255,8 +255,8 @@ function updateSecondGraph(filteredData) {
     });
 
   const myColor = d3.scaleOrdinal()
-    .domain(["nowomen", "pass","fail"])
-    .range(["#231123", "#558c8c", "#82204a"]);
+    .domain(["PASS","FAIL"])
+    .range(["#558c8c", "#82204a"]);
 
   // tooltip
   const tooltip = d3.select("body").append("div")
