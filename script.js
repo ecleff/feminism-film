@@ -189,8 +189,6 @@ svg.append('g')
     row.binary === selectedBechdelResult
   );
     updateSecondGraph(filteredData);
-    console.log("filtered data",filteredData)
-
   });
 
   // Load the data and create the first graph
