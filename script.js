@@ -208,6 +208,7 @@ const svg2 = d3.select("#my_dataviz_1")
 // Draw the second scatterplot with the filtered data
 function updateSecondGraph(filteredData) {
   filteredData.forEach(function (d) {
+    console.log(filteredData);
     d["budget"] = +d["budget"];
     d["intgross"] = +d["intgross"];
 
