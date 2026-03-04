@@ -26,8 +26,6 @@ const svg = d3
 // csv with rollup
 
 d3.csv("movies_1997_2013.csv").then(data => {
-  console.log("First row:", data[0]);
-  console.log("Columns:", Object.keys(data[0]));
   var ungroupedData = data.slice();
   const groupedData = d3.rollup(
     data,
@@ -77,6 +75,8 @@ const x = d3.scaleBand()
 
 // keep only every 5th year for the axis labels
 const xTickYears = years.filter(year => year % 5 === 0);
+console.log(years);
+console.log(xTickYears);
   
   svg.append("g")
   .attr("transform", `translate(0, ${height})`)
