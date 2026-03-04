@@ -38,7 +38,7 @@ d3.csv("movies_1997_2013.csv").then(data => {
           count: v.length,
           budgetMean: d3.mean(v, d => d.budget)
         }),
-        d => d.viz_results
+        d => d.clean_test
       );
     },
     d => d.year
