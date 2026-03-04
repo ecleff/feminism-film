@@ -71,11 +71,13 @@ const x = d3.scaleBand()
   .range([0, width])
   .domain(scatterData.map(d => d.year))
   .padding(0.5);
+// keep only every 5th year for the axis labels
+const xTickYears = years.filter(year => year % 5 === 0);
+//x-axis label ticks
   svg.append("g")
   .attr("transform", `translate(0, ${height})`)
-  .call(d3.axisBottom(x))
+   .call(d3.axisBottom(x).tickValues(xTickYears))
   .selectAll("text")
-    // .attr("transform", "translate(-10,0)rotate(0)")
     .style("font-size", "12px")
     .style("text-anchor", "center");
 
