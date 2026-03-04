@@ -90,7 +90,7 @@ const x = d3.scaleBand()
 
   const y = d3.scaleLinear()
  //   .domain([1000000, 106500000])
-    .domain([1000000, 106500000])
+    .domain(d3.extent(scatterData, d => d.budgetMean))
     .nice()
     .range([height, 0]);
   svg.append("g")
