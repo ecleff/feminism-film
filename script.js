@@ -38,7 +38,7 @@ d3.csv("movies_1997_2013.csv").then(data => {
           count: v.length,
           budgetMean: d3.mean(v, d => d.budget)
         }),
-        d => d.clean_test
+        d => d.binary
       );
     },
     d => d.year
@@ -115,8 +115,8 @@ const z = d3.scaleSqrt()
 
 // // color
 const myColor = d3.scaleOrdinal()
-    .domain(["nowomen", "pass","fail"])
-    .range(["#231123", "#558c8c", "#82204a"]);
+    .domain(["PASS","FAIL"])
+    .range(["#558c8c", "#82204a"]);
 // tooltip
   const tooltip = d3
     .select("#my_dataviz_1")
