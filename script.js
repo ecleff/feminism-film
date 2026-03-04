@@ -26,7 +26,7 @@ const svg = d3
 // csv with rollup
 
 d3.csv("movies_1997_2013.csv").then(data => {
-   console.log("First row:", data[0]);
+  console.log("First row:", data[0]);
   console.log("Columns:", Object.keys(data[0]));
   var ungroupedData = data.slice();
   const groupedData = d3.rollup(
