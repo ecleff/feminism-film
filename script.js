@@ -67,6 +67,9 @@ d3.csv("movies_1997_2013.csv").then(data => {
 
   console.log(scatterData)
 const formatNumber = d3.format(".2s");
+
+const years = Array.from(new Set(scatterData.map(d => +d.year))).sort(d3.ascending);
+  
 const x = d3.scaleBand()
   .range([0, width])
   .domain(scatterData.map(d => d.year))
