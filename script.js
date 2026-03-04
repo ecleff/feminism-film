@@ -262,7 +262,7 @@ function updateSecondGraph(filteredData) {
       return d.year;
     });
 
-  const myColor = d3.scaleOrdinal()
+const myColor2 = d3.scaleOrdinal()
     .domain(["PASS","FAIL"])
     .range(["#558c8c", "#82204a"]);
 
@@ -291,7 +291,7 @@ function updateSecondGraph(filteredData) {
     .attr("cx", d => x2(d.budget))
     .attr("cy", d => y2(d.intgross))
     .attr("r", 5)
-    .style("fill", d => myColor(d.binary))
+    .style("fill", d => myColor2(d.binary))
     .style("opacity", "0.7")
     .on("mouseover", function(event, d) {
       tooltip.transition()
