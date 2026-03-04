@@ -89,7 +89,7 @@ const x = d3.scaleBand()
   // Add Y axis
 
   const y = d3.scaleLinear()
-    .domain([10000000, 106500000])
+    .domain([1000000, 106500000])
     // .domain([10,100])
     .range([height, 0]);
   svg.append("g")
