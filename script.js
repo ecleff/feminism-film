@@ -95,7 +95,7 @@ console.log(xTickYears);
   // Add Y axis
 
   const y = d3.scaleLinear()
-    .domain([1000000, 110000000])
+    .domain([1000000, 100000000])
 //    .domain(d3.extent(scatterData, d => d.budgetMean))
  //   .nice()
     .range([height, 0]);
