@@ -36,12 +36,12 @@ html {
 
 /* adjust typography defaults */
 body {
-  margin: 10px;
+  margin: 10px auto;
   font-family: "Open Sans";
   line-height: 1.5;
   background-color: white;
   color: black;
-  width: 900px;
+  max-width: 900px;
 }
 
 .container {
