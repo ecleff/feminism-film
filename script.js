@@ -252,7 +252,7 @@ function updateSecondGraph(filteredData) {
     .attr("transform", "rotate(-90)")
     .attr("y", -margin.left+120)
     .attr("x", -margin.top)
-    .text("International gross");
+    .text("International gross ($)");
 
   svg2.append("text")
     .data(filteredData)
@@ -299,7 +299,7 @@ const myColor = d3.scaleOrdinal()
       tooltip.transition()
         .duration(200)
         .style("opacity", 0.9);
-      tooltip.html(`Movie title: ${d.title}<br>Budget: $${formatMoney(d.budget)}<br>International gross ($): $${formatMoney(d.intgross)}`)
+      tooltip.html(`Movie title: ${d.title}<br>Budget: $${formatMoney(d.budget)}<br>International gross: $${formatMoney(d.intgross)}`)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 28) + "px");
     })
@@ -316,7 +316,7 @@ const myColor = d3.scaleOrdinal()
 }
 const defaultYear = 2013;
 const initialBechdel = "PASS";
-const initialData = ungroupedData.filter(d => d.year === defaultYear && d.binary === initialBechdel);
+const initialData = ungroupedData.filter(d => d.year === defaultYear && d.bechdelResult === initialBechdel);
 updateSecondGraph(initialData);
 })
 
