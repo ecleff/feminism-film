@@ -261,7 +261,12 @@ function updateSecondGraph(filteredData) {
     .attr("y", height-310)
     .style("font-size", "24px")
     .text(function(d) {
-      return d.year;
+      const verb =
+      d.binary === "PASS" ? "PASSED" :
+      d.binary === "FAIL" ? "FAILED" :
+      (d.binary || "").toUpperCase() + "ED";
+      return `Movies that ${verb} in ${d.year}`;
+      // return d.year;
     });
 
 const myColor = d3.scaleOrdinal()
