@@ -257,7 +257,7 @@ function updateSecondGraph(filteredData) {
     .data(filteredData)
     .attr("text-anchor", "middle")
     .attr("x", width/2)
-    .attr("y", height-20)
+    .attr("y", height-310)
     .style("font-size", "24px")
     .text(function(d) {
       const verb =
