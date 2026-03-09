@@ -316,7 +316,8 @@ const myColor = d3.scaleOrdinal()
 }
 const defaultYear = 2013;
 const initialBechdel = "PASS";
-const initialData = ungroupedData.filter(d => d.year === defaultYear && d.bechdelResult === initialBechdel);
+const initialData = ungroupedData.filter(d => d.year === defaultYear && d.binary === initialBechdel);
+  console.log(initialData);
 updateSecondGraph(initialData);
 })
 
