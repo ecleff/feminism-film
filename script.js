@@ -151,8 +151,7 @@ const myColor = d3.scaleOrdinal()
         .html(
           `In ${d.year}, Hollywood spent an average of $${formatMoney(
             d.budgetMean
-          )} per movie <br /> that had a Bechdel Test result of: ${d.bechdelResult}
-   `
+          )} per movie <br /> that ${d.bechdelResult.toLowerCase()}ed the Bechdel Test`
         )
         .style("left", event.pageX + 10 + "px")
         .style("top", event.pageY + 10 + "px");
@@ -256,17 +255,16 @@ function updateSecondGraph(filteredData) {
 
   svg2.append("text")
     .data(filteredData)
-    .attr("text-anchor", "end")
-    .attr("x", width-500)
+    .attr("text-anchor", "middle")
+    .attr("x", width/2)
     .attr("y", height-310)
     .style("font-size", "24px")
     .text(function(d) {
       const verb =
       d.binary === "PASS" ? "PASSED" :
       d.binary === "FAIL" ? "FAILED" :
-      (d.binary || "").toUpperCase() + "ED";
-      return `Movies that ${verb} in ${d.year}`;
-      // return d.year;
+      (d.binary || "").toLowerCase() + "ed";
+      return `Movies that ${verb} the Bechdel Test in ${d.year}`;
     });
 
 const myColor = d3.scaleOrdinal()
