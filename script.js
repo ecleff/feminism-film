@@ -299,7 +299,7 @@ const myColor = d3.scaleOrdinal()
       tooltip.transition()
         .duration(200)
         .style("opacity", 0.9);
-      tooltip.html(`Movie title: ${d.title}<br>Budget: $${formatMoney(d.budget)}<br>International gross: $${formatMoney(d.intgross)}`)
+      tooltip.html(`Movie title: ${d.title}<br>Budget: $${formatMoney(d.budget)}<br>International gross ($): $${formatMoney(d.intgross)}`)
         .style("left", (event.pageX + 10) + "px")
         .style("top", (event.pageY - 28) + "px");
     })
